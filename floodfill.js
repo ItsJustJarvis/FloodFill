@@ -18,7 +18,7 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
 // UI references
-const restartButton = document.querySelector("#restart");
+const restartButton = document.querySelector(".restart");
 const colorSelectButtons = document.querySelectorAll(".color-select");
 // New Addition - Reference to the undo button
 const undoButton = document.querySelector("#undo");
@@ -26,7 +26,8 @@ const undoButton = document.querySelector("#undo");
 // New Addition - References to new scoreboard elements
 const numberOfClicksText = document.querySelector("#numberOfClicks");
 const playerPointsText = document.querySelector("#playerPoints");
-const results = document.querySelector("#results");
+const gameOver = document.querySelector("#gameOver");
+const highScore = document.querySelector("#highScore");
 
 // Constants
 const CELL_COLORS = {
@@ -47,6 +48,7 @@ let replacementColor = CELL_COLORS.white;
 let grids;
 
 // New Addition - Variables for scoring values
+const WIN_SCORE = 200;
 let numberOfClicks;
 let cellsChanged;
 let playerPoints;
@@ -148,17 +150,19 @@ function checkWinConditions(grid) {
     finalScore = Math.floor(playerPoints / numberOfClicks); // Calculate final score base on points/clicks
     trackHighScores(finalScore); // Call to function that tracks high scores for restarted grids
     // Set the win statemtn and update results section
-    if (finalScore >= 200) {
-        winStatement = `<section id ="winner"><h3>YOU WIN!<p>Final Score:&nbsp;${finalScore}</p></section>`;
+    if (finalScore >= WIN_SCORE) {
+        winStatement = `<h3>YOU WIN!</h3><p>Final Score: ${finalScore}</p>`;
     } else {
-        winStatement = `<section id ="winner"><h3>Sorry, you did not score high enough! Try again.<p>Final Score:&nbsp;${finalScore}</p></section>`;
+        winStatement = `<h3>YOU LOSE!</h3><p>Final Score: ${finalScore}</p>`;
     }
-    results.innerHTML += winStatement;
+    highScore.innerHTML = "<h3>TRY AND BEAT IT!</h3><p>Press Restart</p>";
+    gameOver.innerHTML = winStatement;
 }
 
 function restart() {
     // New Addition - On restart keep the previous high score for reference in the results section
-    results.innerHTML = `<section id ="winner"><h3>Score To Beat<p>${previousHighScore}</p></section>`;
+    gameOver.innerHTML = "";
+    highScore.innerHTML = `<>Score To Beat: ${previousHighScore}</>`;
     startGame(grids[0]);
 }
 
@@ -170,7 +174,7 @@ function undoLastMove() {
         playerPoints -= previousPointGains[previousPointGains.length - 1]; // Decrement player score by most recent point gains
         previousPointGains.pop(); // Remove last point gain to keep accurate history
         numberOfClicks--; // Decrement the number of clicks
-        results.innerHTML = ""; // Remove final results
+        gameOver.innerHTML = "";
         render(grids[grids.length - 1]); // Re-render after changes.
     }
 }
