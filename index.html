@@ -32,7 +32,7 @@
                 min-height: 100%;
             }
             body {
-                width: 60%;
+                width: 75%;
                 margin: auto;
             }
             h1 {
@@ -55,7 +55,8 @@
                 min-height: 100%;
             }
             #gameArea {
-                width: 90%;
+                width: 1000px;
+
                 margin: auto;
                 display: flex;
                 flex-flow: column;
@@ -109,20 +110,23 @@
             #scoreboard {
                 width: 25%;
             }
-            .color-select {
-                flex: 1 1 auto;
-            }
             section#scoreboard p {
                 display: inline-flex;
                 margin: auto;
             }
             #results {
-                text-align: center;
                 margin-bottom: 2rem;
             }
+            #gameOver,
+            #highScore,
             #winner {
+                font-size: 1rem;
+                font-weight: 700;
                 margin: auto;
                 text-align: center;
+            }
+            .color-select {
+                flex: 1 1 auto;
             }
         </style>
     </head>
@@ -148,10 +152,10 @@
                     <!-- New Addition - Updated Information on scoring system -->
                     <h2>Scoring System:</h2>
                     <p>
-                        You get 5 points per cell changed on each click. When you fill the board your final score is calculated based on the number of clicks it
-                        took you to finish. Higher changes, higher rewards!
+                        You get <strong>5 points</strong> per cell changed on each click. When you fill the board your final score is calculated based on the
+                        number of clicks it took you to finish. Higher changes, higher rewards!
                     </p>
-                    <p>You must score at least <strong>200 points</strong> to beat the grid.</p>
+                    <p>Your final score must be at least <strong>200 points</strong> to beat the grid.</p>
                 </div>
             </div>
             <div id="ui">
@@ -166,7 +170,7 @@
                 </section>
                 <section id="changes">
                     <h3>Gameplay Changes:</h3>
-                    <button id="restart">Restart</button>
+                    <button class="restart">Restart</button>
                     <button id="undo">Undo Move</button>
                 </section>
                 <!-- New Addition - Scoreboard area -->
@@ -179,7 +183,10 @@
                 </section>
             </div>
             <!-- New Addition - Area for winning/highscore results -->
-            <div id="results"></div>
+            <div id="results">
+                <section id="gameOver"></section>
+                <section id="highScore"></section>
+            </div>
         </div>
         <script src="floodfill.js"></script>
     </body>
