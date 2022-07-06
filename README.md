@@ -16,7 +16,7 @@ This project was meant to display the skills I have learned in modern JavaScript
 - Click on a cell to change its color to the selected color.
 - All neighbouring cells of the clicked-on cell's color will be changed to the selected color.
   
-**Scoring System:**
+### **Scoring System:**
 ---
 You get 5 points per cell changed on each click. When you fill the board your final score is calculated based on the number of clicks it took you to finish. Higher changes, higher rewards!
   
