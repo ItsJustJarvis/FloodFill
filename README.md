@@ -1,9 +1,6 @@
 # **FloodFill - JS Web Game**
 
 ## **Author:** Reeve Jarvis
-
-<br/>
-
 ---
 ### **Description:**
 
